@@ -471,16 +471,16 @@ class RequestHandler(BaseHTTPRequestHandler):
         .btn-restart {{
             flex: 1;
             background: #1e293b;
-            color: #f87171;
-            border: 1px solid #450a0a;
+            color: #e2e8f0;
+            border: 1px solid #334155;
             padding: 6px 12px;
             border-radius: 6px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
         }}
-        .btn-restart:hover {{ background: #991b1b; color: white; border-color: #dc2626; }}
+        .btn-restart:hover {{ background: #334155; color: #38bdf8; border-color: #38bdf8; }}
         .btn-ping {{
             background: #1e293b;
             color: #38bdf8;
