@@ -152,7 +152,10 @@ def check_services():
     for s in SERVICES:
         t0 = time.time()
         try:
-            req = urllib.request.Request(s["url"], headers={"User-Agent": "SelfHealDoctor/1.0"})
+            headers = {"User-Agent": "Mozilla/5.0"}
+        if "freellm" in s["id"]:
+            headers["Authorization"] = "Bearer freellmapi-4737972ff9f51574683ace9510d73dc179fc3ee310fcd250"
+        req = urllib.request.Request(s["url"], headers=headers)
             with urllib.request.urlopen(req, timeout=8) as resp:
                 status_code = resp.status
                 latency = round((time.time() - t0) * 1000, 1)
