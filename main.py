@@ -619,6 +619,21 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(html.encode("utf-8"))
 
+    def do_HEAD(self):
+        parsed = urlparse(self.path)
+        path = parsed.path
+        if path in ("/health", "/ping"):
+            self.send_response(200)
+            self.send_header("Content-Type", "text/plain")
+            self.end_headers()
+            return
+        if not self.check_auth():
+            self.send_response(401)
+            self.end_headers()
+            return
+        self.send_response(200)
+        self.end_headers()
+
     def do_GET(self):
         parsed = urlparse(self.path)
         path = parsed.path
