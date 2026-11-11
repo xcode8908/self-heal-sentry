@@ -8,7 +8,6 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 
 PORT = int(os.environ.get("PORT", 10000))
 
-# Services configuration
 SERVICES = [
     {
         "id": "nanobot-master",
@@ -151,11 +150,11 @@ def trigger_heal(s):
 def check_services():
     for s in SERVICES:
         t0 = time.time()
-        try:
-            headers = {"User-Agent": "Mozilla/5.0"}
+        headers = {"User-Agent": "Mozilla/5.0"}
         if "freellm" in s["id"]:
             headers["Authorization"] = "Bearer freellmapi-4737972ff9f51574683ace9510d73dc179fc3ee310fcd250"
-        req = urllib.request.Request(s["url"], headers=headers)
+        try:
+            req = urllib.request.Request(s["url"], headers=headers)
             with urllib.request.urlopen(req, timeout=8) as resp:
                 status_code = resp.status
                 latency = round((time.time() - t0) * 1000, 1)
@@ -175,7 +174,6 @@ def check_services():
             s["consecutive_fails"] += 1
             print(f"[Watchdog] Check failed for {s['name']}: {e}")
 
-        # If failed 3 times consecutively, heal!
         if s["consecutive_fails"] >= 3:
             trigger_heal(s)
 
@@ -220,7 +218,6 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b"pong")
         else:
-            # Gorgeous Cyberpunk Dashboard
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
