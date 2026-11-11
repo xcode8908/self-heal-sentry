@@ -24,7 +24,7 @@ SERVICES = [
     {
         "id": "freellm-gateway",
         "name": "FreeLLMAPI Unified Gateway",
-        "url": os.environ.get("URL_FREELLM", "https://freellm.silentxop.workers.dev/v1/models"),
+        "url": os.environ.get("URL_FREELLM", "https://freellmapi-dab8.onrender.com/"),
         "srv_id": os.environ.get("SRV_FREELLM", "srv-dbqaqpjm8hqs73a9mrpg"),
         "token": os.environ.get("TOK_FREELLM", "rnd_9uAnDiiU73twVZe1F1E2E2nc899G"),
         "consecutive_fails": 0,
