@@ -109,11 +109,11 @@ SERVICES = [
         "restarts": 0
     },
     {
-        "id": "picoclaw-worker-6",
-        "name": "Worker 6: Generalist PicoClaw Assistant",
+        "id": "alpine-webtop",
+        "name": "Worker 6: Alpine Linux Cloud Desktop (Webtop)",
         "account": "silentxop8908@gmail.com",
-        "url": os.environ.get("URL_WORKER6", "https://picoclaw-0c71.onrender.com/health"),
-        "srv_id": os.environ.get("SRV_WORKER6", "srv-dalojee1egvs73fb6gt0"),
+        "url": os.environ.get("URL_WORKER6", "https://alpine-webtop.onrender.com/health"),
+        "srv_id": os.environ.get("SRV_WORKER6", "srv-dbrkriu7bikc73aqu7bg"),
         "token": os.environ.get("TOK_WORKER6", "rnd_kN4R27A9gB7xkt9Rf6ioMftEVNBY"),
         "consecutive_fails": 0,
         "status": "starting",
