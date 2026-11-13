@@ -120,6 +120,33 @@ SERVICES = [
         "latency_ms": 0,
         "last_checked": 0,
         "restarts": 0
+    },
+    {
+        "id": "taraprasad-picoclaw",
+        "name": "Taraprasad PicoClaw (@TaraPrimeBot)",
+        "account": "jiatiku74@gmail.com",
+        "url": os.environ.get("URL_TARAPRASAD_PICOCLAW", "https://picoclaw-taraprasad.onrender.com/health"),
+        "srv_id": os.environ.get("SRV_TARAPRASAD_PICOCLAW", "srv-dbrcg95g1s2s7383gji0"),
+        "token": os.environ.get("TOK_TARAPRASAD_PICOCLAW", "rnd_n12Drzx2PbQEW5XZ3fnAMgcC9UHa"),
+        "consecutive_fails": 0,
+        "status": "starting",
+        "latency_ms": 0,
+        "last_checked": 0,
+        "restarts": 0
+    },
+    {
+        "id": "taraprasad-freellm",
+        "name": "Taraprasad FreeLLM Gateway",
+        "account": "sonenadelt@gmail.com",
+        "url": os.environ.get("URL_TARAPRASAD_FREELLM", "https://freellm-taraprasad.onrender.com/api/ping"),
+        "srv_id": os.environ.get("SRV_TARAPRASAD_FREELLM", "srv-dbrcovl9fdbs73e0idr0"),
+        "token": os.environ.get("TOK_TARAPRASAD_FREELLM", "rnd_UD3w4qYiyk8aW4k0NuTx1zxPBUTG"),
+        "api_key": "freellmapi-54f868a9d1283274a6bb2fedd4f0a5efec7afc694da8e586",
+        "consecutive_fails": 0,
+        "status": "starting",
+        "latency_ms": 0,
+        "last_checked": 0,
+        "restarts": 0
     }
 ]
 
@@ -178,7 +205,7 @@ def check_services():
         t0 = time.time()
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) TheDoctorSentry/2.0"}
         if "freellm" in s["id"]:
-            headers["Authorization"] = f"Bearer {FREELLM_KEY}"
+            headers["Authorization"] = f"Bearer {s.get('api_key', FREELLM_KEY)}"
             
         req = urllib.request.Request(s["url"], headers=headers)
         try:
@@ -206,7 +233,7 @@ def check_services():
                 trigger_restart(s)
 
 def watchdog_loop():
-    print("🏥 The Doctor Watchdog Active: 24/7 Monitoring 8 Nodes...")
+    print(f"🏥 The Doctor Watchdog Active: 24/7 Monitoring {len(SERVICES)} Nodes...")
     while True:
         try:
             check_services()
@@ -522,7 +549,7 @@ class RequestHandler(BaseHTTPRequestHandler):
     
     <div class="toolbar">
         <div>
-            <span style="font-size: 13px; color: #94a3b8;">Active Mesh: <b>8 Connected Nodes</b> (Zero Dollar Infrastructure)</span>
+            <span style="font-size: 13px; color: #94a3b8;">Active Mesh: <b>{len(SERVICES)} Connected Nodes</b> (Zero Dollar Infrastructure)</span>
         </div>
         <div style="display: flex; gap: 8px;">
             <button class="btn-tool" onclick="toggleUrls()">👁️ Toggle URLs</button>
@@ -587,7 +614,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         }}
 
         async function runDiagnostics() {{
-            showToast("Running diagnostics pass across all 8 nodes...", "#0284c7");
+            showToast("Running diagnostics pass across all nodes...", "#0284c7");
             try {{
                 const res = await fetch("/api/check", {{ method: "POST" }});
                 const data = await res.json();
