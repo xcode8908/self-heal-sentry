@@ -97,7 +97,7 @@ SERVICES = [
     },
     {
         "id": "picoclaw-worker-5",
-        "name": "Worker 5: Automator & Workflow Engine",
+        "name": "Worker 5: Lipan Personal PicoClaw Assistant (@lipan_apex_bot)",
         "account": "lipan.personal@gmail.com",
         "url": os.environ.get("URL_WORKER5", "https://picoclaw-worker-5.onrender.com/health"),
         "srv_id": os.environ.get("SRV_WORKER5", "srv-dbqd82tg1s2s73e0991g"),
